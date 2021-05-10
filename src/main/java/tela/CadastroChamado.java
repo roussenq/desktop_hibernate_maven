@@ -5,16 +5,26 @@
  */
 package tela;
 
+import dao.ChamadoDao;
+import dao.ChamadoDaoImpl;
+import dao.HibernateUtil;
+import entidade.Chamado;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 
 /**
  *
  * @author David
  */
 public class CadastroChamado extends javax.swing.JFrame {
-
+    
+    private Session session;
+    private Chamado chamado;
+    private ChamadoDao chamadoDao;
+    
     /**
      * Creates new form Template
      */
@@ -23,6 +33,7 @@ public class CadastroChamado extends javax.swing.JFrame {
         Date dataAtual = new Date();
         SimpleDateFormat dataFormatada = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         dataCadastro.setText(dataFormatada.format(dataAtual));
+        chamadoDao = new ChamadoDaoImpl();
     }
 
     /**
@@ -72,11 +83,11 @@ public class CadastroChamado extends javax.swing.JFrame {
 
         equipamento.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         equipamento.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        equipamento.setText("Equipamento:");
+        equipamento.setText("Equipamento:*");
 
         descricao.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         descricao.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        descricao.setText("Descrição:");
+        descricao.setText("Descrição:*");
 
         tfEquipamento.setText(" ");
 
@@ -87,6 +98,11 @@ public class CadastroChamado extends javax.swing.JFrame {
         btLimpar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btLimpar.setText("Limpar");
         btLimpar.setPreferredSize(new java.awt.Dimension(90, 25));
+        btLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLimparActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout painel_principalLayout = new javax.swing.GroupLayout(painel_principal);
         painel_principal.setLayout(painel_principalLayout);
@@ -158,25 +174,51 @@ public class CadastroChamado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
-        
-        boolean erro = validarCampo();
-        if(erro){
-            JOptionPane.showMessageDialog(null, "Os campos são obrigatórios");
-        }else{
+
+        if (!validarCampo()) {
+            session = HibernateUtil.abrirConexao();
             
-        }
+            chamado = new Chamado(tfEquipamento.getText(), taDescricao.getText());
+            try {
+                chamadoDao.salvarOuAlterar(chamado, session);
+                JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+                limpar();
+            } catch (HibernateException e) {
+                JOptionPane.showMessageDialog(null, "erro ao salvar!");
+            }
+        } 
         // TODO add your handling code here:
     }//GEN-LAST:event_btSalvarActionPerformed
 
+    private void btLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimparActionPerformed
+        limpar();
+    }//GEN-LAST:event_btLimparActionPerformed
+
     private boolean validarCampo() {
-       
-        return false;
+        String mensagem = "";
+        boolean erro = false;
+        String equipamento = tfEquipamento.getText().trim();
+        if (equipamento.length() <= 1) {
+//            JOptionPane.showMessageDialog(null, "erro");
+            mensagem += "Valor invalido para o campo equipamento!";
+            erro = true;
+        }
+        String observacao = taDescricao.getText().trim();
+        if (observacao.length() <= 5) {
+            mensagem += "Valor invalido para o campo de descrição!";
+            erro = true;
+        }
+        if (erro) {
+            JOptionPane.showMessageDialog(null, mensagem);
+        }
+        return erro;
     }
-    
-    private void limpar(){
-        
+
+    private void limpar() {
+        tfEquipamento.setText("");
+        taDescricao.setText("");
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -227,5 +269,4 @@ public class CadastroChamado extends javax.swing.JFrame {
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 
-    
 }

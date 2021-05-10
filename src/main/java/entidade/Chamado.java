@@ -21,7 +21,7 @@ public class Chamado implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date cadastro;
     @Column(nullable = false)
     private String equipamento;

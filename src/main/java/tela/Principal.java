@@ -5,6 +5,12 @@
  */
 package tela;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+import java.time.Clock;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author David
@@ -43,7 +49,7 @@ public class Principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema XYZ");
 
-        btNovoChamado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/add_call_32.png"))); // NOI18N
+        btNovoChamado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/imagens/add_call_32.png"))); // NOI18N
         btNovoChamado.setText("ADD CALL");
         btNovoChamado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -51,7 +57,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        iconeNovoChamado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/add_call_48.png"))); // NOI18N
+        iconeNovoChamado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/imagens/add_call_48.png"))); // NOI18N
         iconeNovoChamado.setText(" ");
         iconeNovoChamado.setToolTipText("Novo Chamado");
         iconeNovoChamado.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -69,7 +75,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(btNovoChamado, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65)
                 .addComponent(iconeNovoChamado)
-                .addContainerGap(535, Short.MAX_VALUE))
+                .addContainerGap(483, Short.MAX_VALUE))
         );
         painel_principalLayout.setVerticalGroup(
             painel_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,6 +91,11 @@ public class Principal extends javax.swing.JFrame {
         arquivo.setText("Arquivo");
 
         ajuda.setText("Ajuda");
+        ajuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ajudaActionPerformed(evt);
+            }
+        });
         arquivo.add(ajuda);
 
         editar.setText("Editar");
@@ -106,6 +117,11 @@ public class Principal extends javax.swing.JFrame {
 
         pesquisar_chamado.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
         pesquisar_chamado.setText("Pesquisar Chamado");
+        pesquisar_chamado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pesquisar_chamadoActionPerformed(evt);
+            }
+        });
         cadastro.add(pesquisar_chamado);
 
         jMenuBar1.add(cadastro);
@@ -153,6 +169,23 @@ public class Principal extends javax.swing.JFrame {
     private void iconeNovoChamadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iconeNovoChamadoMouseClicked
         new CadastroChamado().setVisible(true);
     }//GEN-LAST:event_iconeNovoChamadoMouseClicked
+
+    private void ajudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajudaActionPerformed
+          File file = new File("./META-INF/arquivos/manual.pdf");
+//        File file = new File("./target/classes/META-INF/arquivos/manual.pdf");
+        String absolutePath = file.getAbsolutePath();
+//        JOptionPane.showMessageDialog(null, absolutePath);
+        try {
+            java.awt.Desktop desktop= java.awt.Desktop.getDesktop();
+            desktop.open(new File(absolutePath));
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_ajudaActionPerformed
+
+    private void pesquisar_chamadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisar_chamadoActionPerformed
+        new PesquisaChamado().setVisible(true);
+    }//GEN-LAST:event_pesquisar_chamadoActionPerformed
 
     /**
      * @param args the command line arguments

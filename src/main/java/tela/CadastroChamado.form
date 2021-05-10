@@ -151,7 +151,7 @@
               <Font name="Tahoma" size="12" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="4"/>
-            <Property name="text" type="java.lang.String" value="Equipamento:"/>
+            <Property name="text" type="java.lang.String" value="Equipamento:*"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="descricao">
@@ -160,7 +160,7 @@
               <Font name="Tahoma" size="12" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="4"/>
-            <Property name="text" type="java.lang.String" value="Descri&#xe7;&#xe3;o:"/>
+            <Property name="text" type="java.lang.String" value="Descri&#xe7;&#xe3;o:*"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="tfEquipamento">
@@ -193,6 +193,9 @@
               <Dimension value="[90, 25]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btLimparActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
