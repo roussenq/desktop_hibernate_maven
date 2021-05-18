@@ -29,7 +29,7 @@ public class ChamadoDaoImplTest {
         chamadoDao = new ChamadoDaoImpl();
     }
 
-    @Test
+    //@Test
     public void testSalvarChamado() {
         System.out.println("Salvar chamado");
 

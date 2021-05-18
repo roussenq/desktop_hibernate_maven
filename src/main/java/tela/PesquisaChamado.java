@@ -52,6 +52,8 @@ public class PesquisaChamado extends javax.swing.JFrame {
         tfEquipamento = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaChamados = new javax.swing.JTable();
+        btExcluir = new javax.swing.JButton();
+        btAlterar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pesquisar Chamado");
@@ -84,6 +86,24 @@ public class PesquisaChamado extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabelaChamados);
 
+        btExcluir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btExcluir.setText("Excluir");
+        btExcluir.setPreferredSize(new java.awt.Dimension(90, 25));
+        btExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btExcluirActionPerformed(evt);
+            }
+        });
+
+        btAlterar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btAlterar.setText("Alterar");
+        btAlterar.setPreferredSize(new java.awt.Dimension(90, 25));
+        btAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAlterarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout painel_principalLayout = new javax.swing.GroupLayout(painel_principal);
         painel_principal.setLayout(painel_principalLayout);
         painel_principalLayout.setHorizontalGroup(
@@ -93,19 +113,27 @@ public class PesquisaChamado extends javax.swing.JFrame {
                     .addGroup(painel_principalLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(painel_principalLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painel_principalLayout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(lb_equipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tfEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(347, 429, Short.MAX_VALUE))
+                    .addGroup(painel_principalLayout.createSequentialGroup()
+                        .addGroup(painel_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(painel_principalLayout.createSequentialGroup()
+                                .addGap(56, 56, 56)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(painel_principalLayout.createSequentialGroup()
+                                .addGap(125, 125, 125)
+                                .addComponent(btPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(painel_principalLayout.createSequentialGroup()
+                                .addGap(171, 171, 171)
+                                .addComponent(tfEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(painel_principalLayout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(92, Short.MAX_VALUE))
         );
         painel_principalLayout.setVerticalGroup(
             painel_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,11 +142,15 @@ public class PesquisaChamado extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(painel_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lb_equipamento)
-                    .addComponent(tfEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(painel_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -148,7 +180,6 @@ public class PesquisaChamado extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Não foi localizado nenhum chamado!");
                 }
                 popularTabela();
-
             } catch (HibernateException e) {
                 System.out.println("erro ao pesquisar" + e.getMessage());
             } finally {
@@ -157,8 +188,16 @@ public class PesquisaChamado extends javax.swing.JFrame {
         };
     }//GEN-LAST:event_btPesquisarActionPerformed
 
-    private boolean validarCampo() {
+    private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
+       int linhaSelecionada = tabelaChamados.getSelectedRow();
+       
+    }//GEN-LAST:event_btExcluirActionPerformed
 
+    private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btAlterarActionPerformed
+
+    private boolean validarCampo() {
         boolean erro = true;
         String equipamento = tfEquipamento.getText().trim();
         if (equipamento.length() <= 1) {
@@ -175,7 +214,6 @@ public class PesquisaChamado extends javax.swing.JFrame {
         SimpleDateFormat formatado = new SimpleDateFormat("dd/MM/YYYY HH:mm");
         for (Chamado chamadoFor : chamados) {
             ativo = chamadoFor.isAtivo() ? "Aberto" : "Encerrado";
-
             tabelaModelo.addRow(new Object[]{
                 chamadoFor.getEquipamento(),
                 ativo,
@@ -223,6 +261,8 @@ public class PesquisaChamado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btAlterar;
+    private javax.swing.JButton btExcluir;
     private javax.swing.JButton btPesquisar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lb_equipamento;

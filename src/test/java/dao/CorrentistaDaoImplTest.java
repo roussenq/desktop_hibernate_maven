@@ -75,7 +75,7 @@ public class CorrentistaDaoImplTest {
     }
 
   
-    @Test
+    //@Test
     public void testPesquisarCorrentistaPorNome() {
         System.out.println("Correntista pesquisar por Nome");
         buscaCorrentistaBd();
@@ -89,7 +89,7 @@ public class CorrentistaDaoImplTest {
         assertTrue(!correntistas.isEmpty());
     }
 
-    @Test
+    //@Test
     public void testAlterarCorrentista() {
         System.out.println("Alterar correntista");
 

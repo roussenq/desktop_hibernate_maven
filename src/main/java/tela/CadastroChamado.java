@@ -20,11 +20,11 @@ import org.hibernate.Session;
  * @author David
  */
 public class CadastroChamado extends javax.swing.JFrame {
-    
+
     private Session session;
     private Chamado chamado;
     private ChamadoDao chamadoDao;
-    
+
     /**
      * Creates new form Template
      */
@@ -174,10 +174,8 @@ public class CadastroChamado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
-
         if (!validarCampo()) {
             session = HibernateUtil.abrirConexao();
-            
             chamado = new Chamado(tfEquipamento.getText(), taDescricao.getText());
             try {
                 chamadoDao.salvarOuAlterar(chamado, session);
@@ -186,8 +184,7 @@ public class CadastroChamado extends javax.swing.JFrame {
             } catch (HibernateException e) {
                 JOptionPane.showMessageDialog(null, "erro ao salvar!");
             }
-        } 
-        // TODO add your handling code here:
+        }
     }//GEN-LAST:event_btSalvarActionPerformed
 
     private void btLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimparActionPerformed
@@ -199,7 +196,6 @@ public class CadastroChamado extends javax.swing.JFrame {
         boolean erro = false;
         String equipamento = tfEquipamento.getText().trim();
         if (equipamento.length() <= 1) {
-//            JOptionPane.showMessageDialog(null, "erro");
             mensagem += "Valor invalido para o campo equipamento!";
             erro = true;
         }
@@ -219,9 +215,6 @@ public class CadastroChamado extends javax.swing.JFrame {
         taDescricao.setText("");
     }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
