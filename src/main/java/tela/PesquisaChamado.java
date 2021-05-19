@@ -9,6 +9,7 @@ import dao.ChamadoDao;
 import dao.ChamadoDaoImpl;
 import dao.HibernateUtil;
 import entidade.Chamado;
+import java.awt.HeadlessException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -178,8 +179,9 @@ public class PesquisaChamado extends javax.swing.JFrame {
                         tabelaModelo.setNumRows(0);
                     }
                     JOptionPane.showMessageDialog(null, "Não foi localizado nenhum chamado!");
+                } else {
+                    popularTabela();
                 }
-                popularTabela();
             } catch (HibernateException e) {
                 System.out.println("erro ao pesquisar" + e.getMessage());
             } finally {
@@ -189,12 +191,40 @@ public class PesquisaChamado extends javax.swing.JFrame {
     }//GEN-LAST:event_btPesquisarActionPerformed
 
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
-       int linhaSelecionada = tabelaChamados.getSelectedRow();
-       
+        int linhaSelecionada = tabelaChamados.getSelectedRow();
+        if (linhaSelecionada >= 0) {
+            int opcao = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir?");
+            if (opcao == 0) {
+                try {
+                    session = HibernateUtil.abrirConexao();
+                    Chamado chamadoSelecionado = chamados.get(linhaSelecionada);
+                    chamadoDao.excluir(chamadoSelecionado, session);
+                    JOptionPane.showMessageDialog(null, "Chamado excluido com sucesso!\nlinha" + linhaSelecionada);
+                    chamados.remove(linhaSelecionada);
+                    popularTabela();
+                    tfEquipamento.setText("");
+                } catch (HeadlessException | HibernateException e) {
+                    System.out.println("erro ao excluir" + e.getMessage());
+                    JOptionPane.showMessageDialog(null, "Chamado não excluido!");
+                } finally {
+                    session.close();
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione uma linha!");
+        }
     }//GEN-LAST:event_btExcluirActionPerformed
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
-        // TODO add your handling code here:
+        int linhaSelecionada = tabelaChamados.getSelectedRow();
+        if (linhaSelecionada >= 0) {
+            Chamado chamadoSelecionado = chamados.get(linhaSelecionada);
+            new CadastroChamado(chamadoSelecionado).setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione uma linha!");
+        }
+
     }//GEN-LAST:event_btAlterarActionPerformed
 
     private boolean validarCampo() {
